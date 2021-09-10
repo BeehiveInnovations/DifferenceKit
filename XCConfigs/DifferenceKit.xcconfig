@@ -12,7 +12,7 @@ VALID_ARCHS[sdk=iphonesimulator*] = arm64 i386 x86_64
 VALID_ARCHS[sdk=appletv*] = arm64
 VALID_ARCHS[sdk=appletvsimulator*] = arm64 x86_64
 VALID_ARCHS[sdk=watchos*] = arm64_32 armv7k
-VALID_ARCHS[sdk=watchsimulator*] = arm64 i386
+VALID_ARCHS[sdk=watchsimulator*] = arm64 i386 x86_64
 
 CODE_SIGN_IDENTITY =
 CODE_SIGN_STYLE = Manual
