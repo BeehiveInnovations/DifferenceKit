@@ -8,7 +8,7 @@ public protocol ContentIdentifiable {
 }
 
 public extension ContentIdentifiable where Self: Hashable {
-    /// The `self` value as an identifier for difference calculation.
+    /// The `hashValue` as an identifable identifier
     @inlinable
     var differenceIdentifier: Int {
         return hashValue
