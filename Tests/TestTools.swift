@@ -22,6 +22,20 @@ struct M: Differentiable, Equatable {
     }
 }
 
+struct S: Differentiable, Equatable {
+  let s: String
+  let b: Bool
+  
+  init(_ s: String, _ b: Bool) {
+    self.s = s
+    self.b = b
+  }
+  
+  var differenceIdentifier: String {
+    return s
+  }
+}
+
 func XCTAssertExactDifferences<C: RangeReplaceableCollection & Equatable>(
     source: C,
     target: C,

@@ -29,6 +29,18 @@ final class AnyDifferentiableTestCase: XCTestCase {
         XCTAssertEqual(d5.differenceIdentifier.hashValue, d6.differenceIdentifier.hashValue)
         XCTAssertEqual(d5.differenceIdentifier, d6.differenceIdentifier)
         XCTAssertFalse(d5.isContentEqual(to: d6))
+      
+        let base4 = S("1", true)
+        let d7 = AnyDifferentiable(base4)
+        
+        XCTAssertNotEqual(d6.differenceIdentifier.hashValue, d7.differenceIdentifier.hashValue)
+        XCTAssertNotEqual(d6.differenceIdentifier, d7.differenceIdentifier)
+      
+        let base5 = "1"
+        let d8 = AnyDifferentiable(base5)
+      
+        XCTAssertNotEqual(d7.differenceIdentifier.hashValue, d8.differenceIdentifier.hashValue)
+        XCTAssertNotEqual(d7.differenceIdentifier, d8.differenceIdentifier)
     }
 
     func testRedundantWrapping() {

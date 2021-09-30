@@ -118,6 +118,39 @@ extension AlgorithmTestCase {
                 )
             ]
         )
+                
+        struct EM: Hashable, Differentiable {
+            var id: Int
+            var val: Bool
+            
+            func hash(into hasher: inout Hasher) {
+                // Test with only the ID as its hash
+                hasher.combine(id)
+            }
+        }
+        
+        let source2 = [
+            EM(id: 0, val: false),
+            EM(id: 1, val: false),
+            EM(id: 2, val: false)
+        ]
+        let target2 = [
+            EM(id: 0, val: true),
+            EM(id: 1, val: false),
+            EM(id: 2, val: false)
+        ]
+        
+        XCTAssertExactDifferences(
+            source: source2,
+            target: target2,
+            section: section,
+            expected: [
+                Changeset(
+                    data: target2,
+                    elementUpdated: [ElementPath(element: 0, section: section)]
+                )
+            ]
+        )
     }
 
     func testMoved() {
