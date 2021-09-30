@@ -200,9 +200,9 @@ extension AlgorithmTestCase {
                 Changeset(
                     data: target3,
                     elementMoved: [
-                        (source: ElementPath(element: 1, section: section), target: ElementPath(element: 2, section: section)),
+                        (source: ElementPath(element: 3, section: section), target: ElementPath(element: 0, section: section)),
                         (source: ElementPath(element: 2, section: section), target: ElementPath(element: 1, section: section)),
-                        (source: ElementPath(element: 3, section: section), target: ElementPath(element: 0, section: section))
+                        (source: ElementPath(element: 1, section: section), target: ElementPath(element: 2, section: section)),
                     ]
                 )
             ]
@@ -435,16 +435,20 @@ extension AlgorithmTestCase {
     }
 
     func testSectionMoved() {
+        let section0 = ArraySection(model: 0, elements: [0])
+        let section1 = ArraySection(model: 1, elements: [1])
+        let section2 = ArraySection(model: 2, elements: [2])
+        
         let source1 = [
-            ArraySection(model: 0, elements: [0]),
-            ArraySection(model: 1, elements: [1]),
-            ArraySection(model: 2, elements: [2])
+            section0,
+            section1,
+            section2
         ]
 
         let target1 = [
-            ArraySection(model: 1, elements: [1]),
-            ArraySection(model: 2, elements: [2]),
-            ArraySection(model: 0, elements: [0])
+            section1,
+            section2,
+            section0
         ]
 
         XCTAssertExactDifferences(
@@ -462,15 +466,15 @@ extension AlgorithmTestCase {
         )
 
         let source2 = [
-            ArraySection(model: 0, elements: [0]),
-            ArraySection(model: 1, elements: [1]),
-            ArraySection(model: 2, elements: [2])
+            section0,
+            section1,
+            section2
         ]
 
         let target2 = [
-            ArraySection(model: 2, elements: [2]),
-            ArraySection(model: 0, elements: [0]),
-            ArraySection(model: 1, elements: [1])
+            section2,
+            section0,
+            section1
         ]
 
         XCTAssertExactDifferences(
@@ -486,42 +490,52 @@ extension AlgorithmTestCase {
     }
 
     func testMixedSectionChanges() {
+        let section0 = ArraySection(model: M(0, false), elements: [0])
+        let section1 = ArraySection(model: M(1, false), elements: [1])
+        let section2 = ArraySection(model: M(2, false), elements: [2])
+        let section3 = ArraySection(model: M(3, false), elements: [3])
+        let section4 = ArraySection(model: M(4, false), elements: [4])
+        
         let source = [
-            ArraySection(model: M(0, false), elements: [0]),
-            ArraySection(model: M(1, false), elements: [1]),
-            ArraySection(model: M(2, false), elements: [2]),
-            ArraySection(model: M(3, false), elements: [3])
+            section0,
+            section1,
+            section2,
+            section3
         ]
 
         let target = [
-            ArraySection(model: M(3, false), elements: [3]),
-            ArraySection(model: M(4, false), elements: [4]),
-            ArraySection(model: M(0, false), elements: [0]),
-            ArraySection(model: M(2, true), elements: [2])
+            section3,
+            section4,
+            section0,
+            ArraySection(model: M(2, true), elements: [2]) // section2 updated
         ]
 
         XCTAssertExactDifferences(
             source: source,
             target: target,
             expected: [
+                // section1 deleted
                 Changeset(
                     data: [
-                        ArraySection(model: M(0, false), elements: [0]),
-                        ArraySection(model: M(2, false), elements: [2]),
-                        ArraySection(model: M(3, false), elements: [3])
+                        section0,
+                        section2,
+                        section3
                     ],
                     sectionDeleted: [1]
                 ),
+                // section3 moved to 0
+                // section4 inserted
                 Changeset(
                     data: [
-                        ArraySection(model: M(3, false), elements: [3]),
-                        ArraySection(model: M(4, false), elements: [4]),
-                        ArraySection(model: M(0, false), elements: [0]),
-                        ArraySection(model: M(2, false), elements: [2])
+                        section3,
+                        section4,
+                        section0,
+                        section2
                     ],
                     sectionInserted: [1],
                     sectionMoved: [(source: 2, target: 0)]
                 ),
+                // section2 updated
                 Changeset(
                     data: target,
                     sectionUpdated: [3]
@@ -532,14 +546,14 @@ extension AlgorithmTestCase {
 
     func testDuplicatedSection() {
         let source = [
-            ArraySection(model: 0, elements: [0]),
+            ArraySection(model: 0, elements: [1]),
             ArraySection(model: 0, elements: [1]),
             ArraySection(model: 1, elements: [2])
         ]
 
         let target = [
             ArraySection(model: 1, elements: [2]),
-            ArraySection(model: 0, elements: [0]),
+            ArraySection(model: 0, elements: [1]),
             ArraySection(model: 0, elements: [1])
         ]
 
