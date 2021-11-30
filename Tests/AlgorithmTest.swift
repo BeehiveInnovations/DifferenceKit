@@ -789,3 +789,151 @@ extension AlgorithmTestCase {
         XCTAssertReproducible(source: source, target: target)
     }
 }
+//
+///// Nested Sections
+//extension AlgorithmTestCase {
+//    func testNestedSections() {
+//        let diff = ["s"].difference(from: ["a","b","s"]) { a, b in
+//            a == b
+//        }
+//        
+//        
+//        struct ListSection: Equatable, DifferentiableSection {
+//            public var title: String
+//            public var elements: [Task]
+//            
+//            public var differenceIdentifier: String {
+//                return title
+//            }
+//            
+//            public init<C: Collection>(title: String, elements: C) where C.Element == Task {
+//                self.title = title
+//                self.elements = Array(elements)
+//            }
+//            
+//            init<C: Collection>(source: ListSection, elements: C) where C.Element == Task {
+//                self.init(title: source.title, elements: elements)
+//            }
+//            
+//            static func == (lhs: ListSection, rhs: ListSection) -> Bool {
+//                return lhs.title == rhs.title
+//            }
+//            
+//            func isContentEqual(to source: ListSection) -> Bool {
+//                return title == source.title
+//            }
+//        }
+//        
+//        struct Task: Equatable, DifferentiableSection {
+//            public var title: String
+//            public var isDone: Bool
+//            public var elements: [Task]
+//            
+//            public var differenceIdentifier: String {
+//                return title
+//            }
+//            
+//            public init<C: Collection>(title: String, isDone: Bool, elements: C) where C.Element == Task {
+//                self.title = title
+//                self.isDone = isDone
+//                self.elements = Array(elements)
+//            }
+//            
+//            init<C: Collection>(source: Task, elements: C) where C.Element == Task {
+//                self.init(title: source.title, isDone: source.isDone, elements: elements)
+//            }
+//            
+//            func isContentEqual(to source: Task) -> Bool {
+//                return self.title == source.title && self.isDone == source.isDone
+//            }
+//            
+//            static func == (lhs: Task, rhs: Task) -> Bool {
+//                return lhs.title == rhs.title
+//            }
+//        }
+//        
+//        let source = [
+//            ListSection(title: "Yesterday",
+//                        elements: [
+//                            Task(title: "Haircut", isDone: false, elements: []),
+//                            Task(title: "Call Mom", isDone: false, elements: []),
+//                            Task(title: "Submit Project",
+//                                 isDone: false,
+//                                 elements: [
+//                                    Task(title: "Finish draft", isDone: false, elements: []),
+//                                    Task(title: "Complete citation", isDone: false, elements: []),
+//                                    Task(title: "Email professor", isDone: false, elements: []),
+//                                 ])
+//                        ]),
+////            ListSection(title: "Today",
+////                        elements: [
+////                            Task(title: "Call John", isDone: false, elements: []),
+////                            Task(title: "Return book to library", isDone: false, elements: []),
+////                        ])
+//        ]
+//        
+//        let target = [
+//            ListSection(title: "Yesterday",
+//                        elements: [
+//                            Task(title: "Call Mom", isDone: true, elements: []),
+//                            Task(title: "Submit Project",
+//                                 isDone: false,
+//                                 elements: [
+//                                    Task(title: "Finish draft", isDone: true, elements: []),
+//                                    Task(title: "Complete citation", isDone: false, elements: []),
+//                                    Task(title: "Email professor", isDone: false, elements: []),
+//                                 ])
+//                        ]),
+////            ListSection(title: "Today",
+////                        elements: [
+////                            Task(title: "Return book to library", isDone: false, elements: []),
+////                            Task(title: "Call John", isDone: false, elements: []),
+////                        ])
+//        ]
+//        
+//
+//        XCTAssertExactDifferences(
+//            source: source,
+//            target: target,
+//            expected: [
+//                Changeset(
+//                    data: [
+//                        ListSection(title: "Yesterday",
+//                                    elements: [
+//                                        Task(title: "Haircut", isDone: false, elements: []),
+//                                        Task(title: "Call Mom", isDone: true, elements: []),
+//                                        Task(title: "Submit Project",
+//                                             isDone: false,
+//                                             elements: [
+//                                                Task(title: "Finish draft", isDone: true, elements: []),
+//                                                Task(title: "Complete citation", isDone: false, elements: []),
+//                                                Task(title: "Email professor", isDone: false, elements: []),
+//                                             ])
+//                                    ])
+//                    ],
+//                    elementUpdated: [
+//                        ElementPath(element: 1, section: 0),
+//                    ]
+//                ),
+//                Changeset(
+//                    data: [
+//                        ListSection(title: "Yesterday",
+//                                    elements: [
+//                                        Task(title: "Call Mom", isDone: true, elements: []),
+//                                        Task(title: "Submit Project",
+//                                             isDone: false,
+//                                             elements: [
+//                                                Task(title: "Finish draft", isDone: true, elements: []),
+//                                                Task(title: "Complete citation", isDone: false, elements: []),
+//                                                Task(title: "Email professor", isDone: false, elements: []),
+//                                             ])
+//                                    ])
+//                    ],
+//                    elementDeleted: [
+//                        ElementPath(element: 0, section: 0),
+//                    ]
+//                )
+//            ]
+//        )
+//    }
+//}

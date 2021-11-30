@@ -34,8 +34,8 @@ public extension UITableView {
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
             interrupt: interrupt,
-            setData: setData,
             reloadOnlyVisibleRows: reloadOnlyVisibleRows,
+            setData: setData,
             completion: completion
         )
     }
