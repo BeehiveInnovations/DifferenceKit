@@ -13,10 +13,6 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "DifferenceKitDynamic",
-      path: "Sources"
-    ),
-    .target(
       name: "DifferenceKit",
       path: "Sources"
     ),
