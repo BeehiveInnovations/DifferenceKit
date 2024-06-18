@@ -1,11 +1,11 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
   name: "DifferenceKit",
   platforms: [
-    .iOS(.v9), .macOS(.v10_10), .tvOS(.v9), .watchOS(.v2)
+    .iOS(.v13), .macOS(.v10_15), .tvOS(.v9), .watchOS(.v2)
   ],
   products: [
     .library(name: "DifferenceKitDynamic", type: .dynamic, targets: ["DifferenceKit"]),
