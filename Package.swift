@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "DifferenceKit",
   platforms: [
-    .iOS(.v13), .macOS(.v10_15), .tvOS(.v9), .watchOS(.v2)
+    .iOS(.v13), .macOS(.v10_15), .tvOS(.v12), .watchOS(.v9)
   ],
   products: [
     .library(name: "DifferenceKitDynamic", type: .dynamic, targets: ["DifferenceKit"]),
@@ -14,7 +14,10 @@ let package = Package(
   targets: [
     .target(
       name: "DifferenceKit",
-      path: "Sources"
+      path: "Sources",
+      linkerSettings: [
+        .unsafeFlags(["-Wl,-make_mergeable"])
+      ]
     ),
     .testTarget(
       name: "DifferenceKitTests",
