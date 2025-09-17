@@ -1,10 +1,10 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "Modules",
     dependencies: [
-        .package(url: "https://github.com/ra1028/swift-mod.git", .exact("0.0.1"))
+        .package(url: "https://github.com/ra1028/swift-mod.git", exact: "0.0.1")
     ]
 )
