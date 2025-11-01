@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "DifferenceKit",
   platforms: [
-    .iOS(.v13), .macOS(.v10_15), .tvOS(.v9), .watchOS(.v2)
+    .iOS(.v14), .macOS(.v11), .tvOS(.v12), .watchOS(.v8)
   ],
   products: [
     .library(name: "DifferenceKitDynamic", type: .dynamic, targets: ["DifferenceKit"])
